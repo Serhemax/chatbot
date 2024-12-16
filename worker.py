@@ -44,8 +44,10 @@ def process_document(document_path, conversation_id="default"):
     texts = text_splitter.split_documents(documents)
     
     # Create a vector store with the metadata
-    db = Chroma.from_documents(texts, llm_embeddings, persist_directory='./docs/chroma')
-    
+    db = Chroma.from_documents(
+        texts, llm_embeddings,
+        persist_directory=".db/"  # Use the same directory as initialized above
+    )
     # Append the new vector store and document name to the conversation data
     conversation_data[conversation_id]["vector_stores"].append(db)
     conversation_data[conversation_id]["document_sources"].append(document_name)
