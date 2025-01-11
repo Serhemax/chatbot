@@ -21,7 +21,7 @@ Via conda (miniconda):
 Or via Python Venv:
 
 ```
-  python3.12 -m venv env​
+  python -m venv env​
   source env/bin/activate​
 ```
 ​
