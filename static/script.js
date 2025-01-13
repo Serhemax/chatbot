@@ -56,8 +56,7 @@ const scrollToBottom = () => {
   });
 };
 
-const populateUserMessage = (userMessage, userRecording) => {
-  // Clear the input field
+const populateUserMessage = (userMessage) => {
   $("#message-input").val("");
 
   // Append the user's message to the message list
@@ -67,6 +66,7 @@ const populateUserMessage = (userMessage, userRecording) => {
 
   scrollToBottom();
 };
+
 
 let isFirstMessage = true;
 
@@ -85,12 +85,68 @@ const populateBotResponse = async (userMessage) => {
 
   renderBotResponse(response, uploadButtonHtml)
 
+  
+  isFirstMessage = false;
+  
+};
+
+const renderBotResponse = (response, uploadButtonHtml) => {
+  responses.push(response);
+
+  hideBotLoadingAnimation();
+
+  $("#message-list").append(`
+    <div class='message-line'>
+      <div class='message-box'>
+        ${response.botResponse.trim()}<br>${uploadButtonHtml}
+      </div>
+    </div>
+  `);
+
+  scrollToBottom();
+};
+
+populateBotResponse()
+
+
+$(document).ready(function () {
+
+  //start the chat with send button disabled
+  document.getElementById('send-button').disabled = true;
+
+  // Update the "Send" button functionality
+  $("#send-button").click(async function () {
+    // Get the message the user typed in
+    const message = cleanTextInput($("#message-input").val());
+  
+    populateUserMessage(message, null);
+    populateBotResponse(message);
+  
+    });
+  // Listen for "Enter" keypress and clear the input box
+  // Listen for the "Enter" key being pressed in the input field
+  $("#message-input").keyup(function (event) {
+    let inputVal = cleanTextInput($("#message-input").val());
+
+    if (event.keyCode === 13 && inputVal != "") {
+      const message = inputVal;
+
+      populateUserMessage(message, null);
+      populateBotResponse(message);
+    }
+
+    inputVal = $("#message-input").val();
+  });
+
+
+
   $("#upload-button").on("click", function () {
     $("#file-upload").click();
   });
 
   $("#file-upload").on("change", async function () {
     const file = this.files[0];
+    console.log(file.name);
 
     const conversationId = "default";
 
@@ -108,7 +164,20 @@ const populateBotResponse = async (userMessage) => {
       body: formData, // send the FormData instance as the body
     });
     
-    if (response.status == 200) document.querySelector('#documents-list').insertAdjacentHTML('beforeend', `<li>${file.name}</li>`);
+    if (response.status == 200) {
+      const fileName = file.name;
+      if (
+        !Array.from($("#documents-list li")).some(
+          (li) => $(li).find("span").text() === fileName
+        )
+      ){
+      document.querySelector('#documents-list').insertAdjacentHTML('beforeend', 
+        `<li class="d-flex justify-content-between align-items-center">
+            <span>${fileName}</span>
+            <button class="btn btn-sm btn-danger delete-file-button" data-file-name="${fileName}">Delete</button>
+          </li>`);
+      }
+    }
 
     if (response.status == 400) {
          document.querySelector('#upload-button').disabled = true;
@@ -118,59 +187,26 @@ const populateBotResponse = async (userMessage) => {
     console.log('/process-document', result)
     renderBotResponse(response, '')
   });
-  isFirstMessage = false;
-};
 
-const renderBotResponse = (response, uploadButtonHtml) => {
-  responses.push(response);
+  // Handle file-specific deletion
+  $("#documents-list").on("click", ".delete-file-button", async function () {
+    const fileName = $(this).data("file-name");
 
-  hideBotLoadingAnimation();
+    const response = await fetch(`${baseUrl}/delete-file`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ fileName }),
+    });
 
-  // Display the bot's response along with the document source(s)
-  $("#message-list").append(
-    `<div class='message-line'><div class='message-box'>${response.botResponse.trim()}<br>${uploadButtonHtml}</div></div>`
-  );
+    const result = await response.json();
+    alert(result.message);
 
-  // Extract and display the citation from the response (if present)
-  if (response.botResponse.includes("Information taken from:")) {
-    const citation = response.botResponse.split("\n\nInformation taken from:")[1];
-    $("#message-list").append(`<div class="citation">Cited from: ${citation}</div>`);
-  }
-  
-  scrollToBottom();
-}
-
-populateBotResponse()
-
-
-$(document).ready(function () {
-
-  //start the chat with send button disabled
-  document.getElementById('send-button').disabled = true;
-
-  // Listen for the "Enter" key being pressed in the input field
-  $("#message-input").keyup(function (event) {
-    let inputVal = cleanTextInput($("#message-input").val());
-
-    if (event.keyCode === 13 && inputVal != "") {
-      const message = inputVal;
-
-      populateUserMessage(message, null);
-      populateBotResponse(message);
+    if (response.status === 200) {
+      // Remove the file entry from the list
+      $(this).closest("li").remove();
     }
-
-    inputVal = $("#message-input").val();
   });
 
-  // When the user clicks the "Send" button
-  $("#send-button").click(async function () {
-  // Get the message the user typed in
-  const message = cleanTextInput($("#message-input").val());
-
-  populateUserMessage(message, null);
-  populateBotResponse(message);
-
-  });
 
   //reset chat
   // When the user clicks the "Reset" button
