@@ -1,0 +1,92 @@
+Generative AI in Medicine and Healthcare
+What is Generative Artificial Intelligence?
+Generative Artificial Intelligence (AI) is a type of AI that creates new content, such as text, images, or audio, based on patterns learned from existing data.
+
+How is Generative AI used in medicine?
+Generative AI is used in medicine for clinical documentation, decision support, patient engagement, medical imaging, synthetic data generation, and medical education.
+
+What is Hippocratic AI?
+Hippocratic AI is a generative AI model designed for patient engagement, focusing on providing empathetic and safe healthcare communication without making medical diagnoses.
+
+What challenges does Generative AI face in healthcare?
+Challenges include trust issues, data privacy concerns, regulatory hurdles, AI bias, and lack of transparency in decision-making.
+
+Can Generative AI replace doctors?
+No, Generative AI is meant to assist healthcare professionals by improving efficiency and patient engagement, but it cannot replace human expertise in medical decision-making.
+
+Generative artificial intelligence
+
+How is Generative AI different from traditional AI?
+Traditional AI focuses on tasks like classification and decision-making, while Generative AI creates new content by modeling data distributions and generating realistic outputs​
+.
+
+What are some common applications of Generative AI?
+Generative AI is used in text generation (e.g., ChatGPT), image creation (e.g., Stable Diffusion), video synthesis, music composition, software development, and scientific research such as drug discovery​
+.
+
+What are the main challenges of Generative AI?
+The key challenges include bias in training data, lack of transparency, hallucinations (incorrect AI-generated content), misuse (e.g., deepfakes), and societal concerns such as job displacement​
+.
+
+How does Generative AI impact businesses?
+Businesses use Generative AI for automation, content creation, customer support, and marketing, enabling faster workflows and innovative services but also raising ethical and legal concerns
+
+
+rag-deck 
+
+What is RAG (Retrieval-Augmented Generation)?
+RAG is a technique that enhances language models by combining them with a retrieval system, allowing them to use external knowledge sources to generate more accurate and contextually relevant responses​
+.
+
+What are the key technical components of RAG?
+RAG involves data preparation (chunking, embeddings), input processing (query expansion, named entity recognition), retrieval (search, multi-step retrieval, re-ranking), and answer generation (context window management, optimization, safety checks)​
+.
+
+What is chunking in RAG?
+Chunking involves breaking large documents into smaller pieces for easier retrieval and processing, reducing cost and improving efficiency​
+.
+
+What are embeddings in RAG?
+Embeddings convert text and metadata into numerical representations, helping the model find relevant content more effectively during retrieval​
+.
+
+How can RAG responses be optimized?
+Responses can be optimized using prompt engineering, few-shot examples, fine-tuning, and safety checks to ensure accuracy and relevance​
+
+
+Generative_AI_Overview
+
+
+What is ChatGPT?
+ChatGPT is a chatbot developed by OpenAI that generates human-like text based on user input.
+
+What is DALL-E?
+DALL-E is an AI model developed by OpenAI that generates images based on text descriptions.
+
+What is the difference between AI and machine learning?
+AI refers to machines mimicking human intelligence, while machine learning is a subset of AI that enables models to learn from data patterns.
+
+What are the main types of machine learning?
+Machine learning includes supervised learning, unsupervised learning, and reinforcement learning.
+
+What are the limitations of generative AI?
+Generative AI can produce incorrect, biased, or misleading outputs and should be monitored by humans.
+
+
+
+Challenges_and_Opportunites_of_Generative_AI_for_Higher_Education
+
+What is generative AI in higher education?
+Generative AI is a technology that uses deep learning models to generate human-like content, such as text and images, in response to complex prompts.
+
+How can ChatGPT be used in education?
+ChatGPT can assist students with answering questions, generating essay ideas, providing tutoring, and improving language skills.
+
+What are the risks of using ChatGPT in education?
+The risks include plagiarism, misinformation, lack of critical thinking development, and ethical concerns about academic integrity.
+
+How can universities prevent misuse of ChatGPT?
+Universities can set clear policies, educate students on responsible AI use, implement AI detection tools, and encourage ethical academic practices.
+
+Can ChatGPT replace teachers?
+No, ChatGPT can assist in education but cannot replace human teachers, as it lacks real expertise, critical thinking, and personal interaction skills.
